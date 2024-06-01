@@ -12,7 +12,6 @@
 const API_KEY = 'AIzaSyDZGuUd-EdDZW4R2drWRl-VsSOIWZY-rDk';
 
 const getNearbyRestaurants = async (latitude, longitude, isVegan) => {
-    console.log("Getting nearby restaurants");
     try {
         const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?${new URLSearchParams({
             ...(isVegan && { keyword: 'vegan' }), // Uncomment this line to only show vegan restaurants
