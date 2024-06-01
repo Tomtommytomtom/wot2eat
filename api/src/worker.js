@@ -55,7 +55,7 @@ export default {
 
     const recommendations = await getNearbyRestaurants(latitude, longitude, isVegan);
 
-    const filteredRecommendations = filterRecommendationsByType(recommendations, isVegan);
+    const filteredRecommendations = filterRecommendationsByType(recommendations);
     return constructResponse(filteredRecommendations)
   },
 };
