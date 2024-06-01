@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import Place from './components/Place.vue';
 import SpinningButton from './SpinningButton.vue';
+import Place from './components/Place.vue';
 
 const isVegan = ref(false);
 
@@ -14,6 +14,7 @@ const place = ref()
 const getRandomArrayElement = (array: any[]) => array[Math.floor(Math.random() * array.length)];
 
 const isLoading = ref(false);
+const isError = ref<string | undefined>(undefined);
 
 const onSearch = async () => {
   const coordinates = await getCoordinates();
@@ -28,6 +29,10 @@ const onSearch = async () => {
 
   isLoading.value = true;
   fetch('https://worker-delicate-dew-3a48.schueleraron.workers.dev/?' + paramString).then(response => response.json()).then(response => {
+    if(!response.length) {
+      isError.value = 'No places found';
+      return;
+    }
     place.value = getRandomArrayElement(response);
   }).finally(() => {
     isLoading.value = false;
@@ -43,6 +48,8 @@ const onSearch = async () => {
     </label>
 
     <SpinningButton v-if="!place" :is-loading @click="onSearch">What 2 Eat?</SpinningButton>
+    <p v-else-if="isError"
+    >{{ isError }}</p>
     <Place v-else :place="place"></Place>
   </div>
 </template>

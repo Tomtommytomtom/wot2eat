@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { Place } from './place';
+import { Place } from "./place";
 
-defineProps<{ place: Place }>(); 
+defineProps<{ place: Place }>();
 
 const getIframeUrl = (placeId: string) => {
   return `https://www.google.com/maps/embed/v1/place?key=AIzaSyDZGuUd-EdDZW4R2drWRl-VsSOIWZY-rDk&q=place_id:${placeId}`;
 };
-
 </script>
 
 <template>
