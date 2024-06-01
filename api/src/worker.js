@@ -30,7 +30,7 @@ const getNearbyRestaurants = async (latitude, longitude, isVegan) => {
     }
 };
 
-const filterRecommendationsByType = (recommendations) => {
+const filterRecommendationsByTypeAndOpen = (recommendations) => {
     return recommendations.filter((recommendation) => {
         const isRestaurant = recommendation.types.includes('food') || recommendation.types.includes('restaurant');
         const isOpen = recommendation.opening_hours && recommendation.opening_hours.open_now;
@@ -55,7 +55,7 @@ export default {
 
     const recommendations = await getNearbyRestaurants(latitude, longitude, isVegan);
 
-    const filteredRecommendations = filterRecommendationsByType(recommendations);
+    const filteredRecommendations = filterRecommendationsByTypeAndOpen(recommendations);
     return constructResponse(filteredRecommendations)
   },
 };
